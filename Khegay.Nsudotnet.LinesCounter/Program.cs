@@ -78,4 +78,4 @@ namespace Khegay.Nsudotnet.LinesCounter
     }     /* Just a test of a multiline comment
         Theoretically, line count shouldn't 
     change /* /*
-/* /* /**/}
+/* Yeah /*  It/* Doesn't */}
