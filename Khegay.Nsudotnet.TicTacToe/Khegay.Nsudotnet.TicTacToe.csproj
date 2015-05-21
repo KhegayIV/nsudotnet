@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Display\ConsoleDisplay.cs" />
+    <Compile Include="Display\TextView.cs" />
     <Compile Include="Display\View.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
