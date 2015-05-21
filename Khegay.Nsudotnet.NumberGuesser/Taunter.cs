@@ -61,7 +61,7 @@ namespace Khegay.Nsudotnet.NumberGuesser
         {
             uint level = _taunts.Max(i => i.Key > _level ? 0 : i.Key);
             var list = _taunts[level];
-            return String.Format(list[_rnd.Next(list.Capacity)], _name);
+            return String.Format(list[_rnd.Next(list.Count)], _name);
         }
     }
 }
