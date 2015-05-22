@@ -4,54 +4,44 @@ using System.Linq;
 
 namespace Khegay.Nsudotnet.TicTacToe.Display
 {
-    class AlignedTextView : View
+    class AlignedTextView : TextView
     {
         public Align TextAlign { get; set; }
-        public ConsoleColor Color { get; set; }
-        private List<string> _text;
-        public List<string> Text
+
+        protected override string[] Lines
         {
-            get { return _text; }
+            get { return base.Lines; }
             set
             {
-                _text = value;
-                Height = _text.Count;
+                base.Lines = value;
+                Height = value.Length;
             }
         }
 
-        public AlignedTextView(int width, Align align = Align.Left, List<string> text = null, ConsoleColor color = ConsoleColor.White)
-            : base(width, 0)
+        protected override char GetSymbol(int x, int y)
         {
-            TextAlign = align;
-            Color = color;
-            _text = text ?? new List<string>();
-        }
-
-        public AlignedTextView(int width, Align align, string text, ConsoleColor color = ConsoleColor.White)
-            : this(width, align, text.Split('\n').ToList(), color)
-        {
-            
-        }
-
-        protected override Tuple<char, ConsoleColor> Get(int x, int y)
-        {
-            string s = _text[y];
+            string s = Lines[y];
             switch (TextAlign)
             {
                 case Align.Left:
-                    return Tuple.Create(s.Length < x ? s[x] : ' ', Color);
+                    return s.Length > x ? s[x] : ' ';
                 case Align.Right:
-                    
-                    return Tuple.Create(s.Length >= Width - x  ? s[x - (Width - s.Length)] : ' ', Color);
+
+                    return s.Length >= Width - x ? s[x - (Width - s.Length)] : ' ';
                 //case Align.Center:
                 default:
-                    int position = x - (Width - s.Length)/2;
-                    return Tuple.Create(
-                        position >= 0 && position<s.Length ? s[position] : ' ', Color
-                        );
+                    int position = x - (Width - s.Length) / 2;
+                    return position >= 0 && position < s.Length ? s[position] : ' ';
             }
         }
 
-        public enum Align{Left, Right, Center}
+        public AlignedTextView(int width, Align align = Align.Left, ConsoleColor color = ConsoleColor.White) : base(width, 0, color)
+        {
+            TextAlign = align;
+        }
+
+        public enum Align { Left, Right, Center }
     }
+
+         
 }

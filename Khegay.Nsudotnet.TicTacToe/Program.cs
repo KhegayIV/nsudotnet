@@ -13,11 +13,8 @@ namespace Khegay.Nsudotnet.TicTacToe
         public const ConsoleColor OColorPassive = ConsoleColor.DarkRed;
         static void Main(string[] args)
         {
-
-            Console.Write("a  W |");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("||_|||");
-            Console.ReadKey();
+            
+            new Game().Start();
 
         }
     }

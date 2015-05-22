@@ -92,10 +92,15 @@ namespace Khegay.Nsudotnet.TicTacToe.Model
                 Victory = _cellVictoryMark.Invoke(this[1, 1]);
                 return;
             }
-            if (_cells.Cast<TCell>().Count(e => _cellIsMutable(e)) == 0)
+            if (EmptyCells() == 0)
             {
                 Draw = true;
-            };
+            }
+        }
+
+        public int EmptyCells()
+        {
+            return _cells.Cast<TCell>().Count(e => _cellIsMutable(e));
         }
         
     }

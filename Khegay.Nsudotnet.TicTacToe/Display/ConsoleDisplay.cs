@@ -30,6 +30,8 @@ namespace Khegay.Nsudotnet.TicTacToe.Display
 
         public void Draw()
         {
+            Console.Clear();
+            
             //Dictionary, that stores offset from top-left corner of view and view itself
             var dxdy = new Dictionary<Tuple<int, int>, Tuple<int, int, View>>();
 
@@ -50,8 +52,10 @@ namespace Khegay.Nsudotnet.TicTacToe.Display
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    var tuple = dxdy[Tuple.Create(x, y)];
-                    if (tuple == null)
+                    
+                    //if (x == 38) Console.Write("!");
+                    Tuple<int, int, View> tuple;
+                    if (!dxdy.TryGetValue(Tuple.Create(x, y), out tuple))
                     {
                         Console.Write(' ');
                         continue;
@@ -60,6 +64,9 @@ namespace Khegay.Nsudotnet.TicTacToe.Display
                     var letter = tuple.Item3[tuple.Item1, tuple.Item2];
                     //Set text color from letter
                     Console.ForegroundColor = letter.Item2;
+
+
+
                     //Write text of a letter
                     Console.Write(letter.Item1);
                 }

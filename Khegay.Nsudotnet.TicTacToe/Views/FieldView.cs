@@ -25,7 +25,7 @@ namespace Khegay.Nsudotnet.TicTacToe.Views
             //Horizontal edge
             if (y % 6 == 0)
             {
-                return Tuple.Create(x % 2 == 0 ? '+' : '|', ConsoleColor.White);
+                return Tuple.Create(x % 2 == 0 ? '+' : '-', ConsoleColor.White);
             }
             //If not edge, than it's minifield at position x/6, y/6
             return GetFromMinifield(x%6 - 1, y%6 - 1, _field[x/6, y/6]);
@@ -63,7 +63,7 @@ namespace Khegay.Nsudotnet.TicTacToe.Views
                         color = Program.OColorPassive;
                         break;
                     default:
-                        color = ConsoleColor.Gray;
+                        color = ConsoleColor.DarkGray;
                         break;
                 }
             }

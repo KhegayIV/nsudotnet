@@ -16,8 +16,13 @@ namespace Khegay.Nsudotnet.TicTacToe.Model
             
         }
 
-        
 
+        public override void Reset()
+        {
+            base.Reset();
+            _player = Mark.X;
+            _current = null;
+        }
 
         public void Step(int x, int y)
         {
@@ -38,11 +43,21 @@ namespace Khegay.Nsudotnet.TicTacToe.Model
                 _current.Active = false;
             }
             _current = this[x, y];
-            _current.Active = true;
+            if (_current.EmptyCells() > 0)
+            {
+                _current.Active = true;
+            }
+            else
+            {
+                _current = null;
+            }
+         
+
         }
 
         private void StepCurrent(int x, int y)
         {
+            if (_current[x, y] != Mark.No) return;
             _current[x, y] = _player;
             Check();
             _player = _player == Mark.O ? Mark.X : Mark.O;

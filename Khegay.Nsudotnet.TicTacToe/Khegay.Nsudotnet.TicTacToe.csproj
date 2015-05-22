@@ -46,6 +46,7 @@
     <Compile Include="Display\AlignedTextView.cs" />
     <Compile Include="Display\ConsoleDisplay.cs" />
     <Compile Include="Display\MultilineTextView.cs" />
+    <Compile Include="Display\StaticTextView.cs" />
     <Compile Include="Display\TextView.cs" />
     <Compile Include="Display\View.cs" />
     <Compile Include="Game.cs" />

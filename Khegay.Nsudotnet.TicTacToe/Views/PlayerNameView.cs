@@ -12,24 +12,22 @@ namespace Khegay.Nsudotnet.TicTacToe.Views
         private readonly ConsoleColor _colorPassive;
         public bool Active
         {
-            set
-            {
-                if (value)
-                {
-                    Color = _colorActive;
-                }
-                else
-                {
-                    Color = _colorPassive;
-                }
+            set {
+                Color = value ? _colorActive : _colorPassive;
             }
         }
 
-        public PlayerNameView(int width, Align align, string name, ConsoleColor colorActive, ConsoleColor colorPassive)
-            : base(width, align, name)
+        public PlayerNameView(int width, Align align, ConsoleColor colorActive, ConsoleColor colorPassive)
+            : base(width, align)
         {
             _colorActive = colorActive;
             _colorPassive = colorPassive;
+        }
+
+        public PlayerNameView SetName(string name)
+        {
+            SetLines(name);
+            return this;
         }
 
 

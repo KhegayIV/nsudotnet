@@ -5,61 +5,59 @@ using System.Text;
 
 namespace Khegay.Nsudotnet.TicTacToe.Display
 {
-    class MultilineTextView : AlignedTextView
+    internal class MultilineTextView : AlignedTextView
     {
-        private string _line;
-
-        public string Line
+        protected override string[] Lines
         {
-            get { return _line; }
-            set
-            {
-                _line = value; 
-                Recount();
-            }
+            get { return base.Lines; }
+            set { base.Lines = Recount(value); }
         }
 
-
-        public MultilineTextView(int width, Align align = Align.Left, string text ="", ConsoleColor color = ConsoleColor.White) : base(width, align)
+        public MultilineTextView(int width, Align align = Align.Left, ConsoleColor color = ConsoleColor.White)
+            : base(width, align, color)
         {
-            Line = text;
         }
 
-        private void Recount()
+        private string[] Recount(string[] lines)
         {
-            Text = new List<string>();
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (var word in _line.Split(' '))
+            var text = new List<string>();
+            var stringBuilder = new StringBuilder();
+            foreach (var line in lines)
             {
-                if (stringBuilder.Length == 0)
+                foreach (var word in line.Split(' '))
                 {
-                    if (word.Length > Width)
+                    if (stringBuilder.Length == 0)
                     {
-                        var s = word;
-                        while (s.Length > Width)
+                        if (word.Length > Width)
                         {
-                            Text.Add(s.Substring(0, Width));
-                            s = s.Remove(0, Width);
+                            var s = word;
+                            while (s.Length > Width)
+                            {
+                                text.Add(s.Substring(0, Width));
+                                s = s.Remove(0, Width);
+                            }
+                            stringBuilder.Append(s);
+                            continue;
                         }
-                        stringBuilder.Append(s);
+
+                        stringBuilder.Append(word);
                         continue;
                     }
+                    if (stringBuilder.Length + 1 + word.Length > Width)
+                    {
+                        text.Add(stringBuilder.ToString());
+                        stringBuilder.Clear().Append(word);
+                    }
+                    else
+                    {
+                        stringBuilder.Append(' ').Append(word);
+                    }
 
-                    stringBuilder.Append(word);
-                    continue;
                 }
-
-                if (stringBuilder.Length + 1 + word.Length > Width)
-                {
-                    Text.Add(stringBuilder.ToString());
-                    stringBuilder.Clear().Append(word);
-                }
-                else
-                {
-                    stringBuilder.Append(' ').Append(word);
-                }
-                
+                text.Add(stringBuilder.ToString());
+                stringBuilder.Clear();
             }
+            return text.ToArray();
         }
     }
 }
