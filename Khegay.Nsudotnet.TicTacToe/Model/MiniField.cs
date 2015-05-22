@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Khegay.Nsudotnet.TicTacToe.Views;
+﻿using Khegay.Nsudotnet.TicTacToe.Views;
 
-namespace Khegay.Nsudotnet.TicTacToe
+namespace Khegay.Nsudotnet.TicTacToe.Model
 {
     public class MiniField : AbstractField<Mark>
     {

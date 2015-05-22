@@ -28,7 +28,7 @@ namespace Khegay.Nsudotnet.TicTacToe.Display
         }
 
         public TextView(string text, ConsoleColor color = ConsoleColor.White)
-            : this(text.Split(Environment.NewLine.ToCharArray()).ToList(), color)
+            : this(text.Split('\n').ToList(), color)
         {
             
         }

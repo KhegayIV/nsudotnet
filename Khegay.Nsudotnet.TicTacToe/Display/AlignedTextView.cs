@@ -28,7 +28,7 @@ namespace Khegay.Nsudotnet.TicTacToe.Display
         }
 
         public AlignedTextView(int width, Align align, string text, ConsoleColor color = ConsoleColor.White)
-            : this(width, align, text.Split(Environment.NewLine.ToCharArray()).ToList(), color)
+            : this(width, align, text.Split('\n').ToList(), color)
         {
             
         }

@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Khegay.Nsudotnet.TicTacToe.Views;
+﻿using Khegay.Nsudotnet.TicTacToe.Views;
 
-namespace Khegay.Nsudotnet.TicTacToe
+namespace Khegay.Nsudotnet.TicTacToe.Model
 {
     public class Field : AbstractField<MiniField>
     {
         private MiniField _current;
         private Mark _player = Mark.X;
+        public Mark Player
+        {
+            get { return _player; }
+        }
 
         public Field() : base((a,b) => a.Victory == b.Victory, a => a.Victory, a => !a.Draw && a.Victory == Mark.No)
         {
+            
         }
+
+        
 
 
         public void Step(int x, int y)

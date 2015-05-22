@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Khegay.Nsudotnet.TicTacToe.Display;
+using Khegay.Nsudotnet.TicTacToe.Model;
 
 namespace Khegay.Nsudotnet.TicTacToe.Views
 {

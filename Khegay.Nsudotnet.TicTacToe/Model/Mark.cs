@@ -1,6 +1,6 @@
-﻿namespace Khegay.Nsudotnet.TicTacToe
+﻿namespace Khegay.Nsudotnet.TicTacToe.Model
 {
-    enum Mark
+    public enum Mark
     {
         No, X, O
     }

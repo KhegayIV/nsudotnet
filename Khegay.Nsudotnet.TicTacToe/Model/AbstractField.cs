@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace Khegay.Nsudotnet.TicTacToe.Views
+namespace Khegay.Nsudotnet.TicTacToe.Model
 {
     //Base class for both field and minifield
-    public abstract class AbstractField<TCell>
+    public abstract class AbstractField<TCell> where TCell: new()
     {
         
 
@@ -26,6 +25,20 @@ namespace Khegay.Nsudotnet.TicTacToe.Views
             _cellIsMutable = cellIsMutable;
 
             _cells = new TCell[3, 3];
+            for (int i = 0; i < 9; i++)
+            {
+                _cells[i % 3, i / 3] = new TCell();
+            }
+        }
+
+        public virtual void Reset()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                _cells[i % 3, i / 3] = new TCell();
+            }
+            Victory = Mark.No;
+            Draw = false;
         }
 
         public TCell this[int x, int y]
@@ -44,8 +57,8 @@ namespace Khegay.Nsudotnet.TicTacToe.Views
             }
         }
 
-        public Mark Victory { get; private set; }
-        public bool Draw { get; private set; }
+        public Mark Victory { get; protected set ; }
+        public bool Draw { get; protected set; }
 
 
         public void Check()

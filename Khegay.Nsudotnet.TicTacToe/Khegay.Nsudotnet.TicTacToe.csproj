@@ -45,8 +45,10 @@
   <ItemGroup>
     <Compile Include="Display\AlignedTextView.cs" />
     <Compile Include="Display\ConsoleDisplay.cs" />
+    <Compile Include="Display\MultilineTextView.cs" />
     <Compile Include="Display\TextView.cs" />
     <Compile Include="Display\View.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Model\Field.cs" />
     <Compile Include="Model\Mark.cs" />
     <Compile Include="Model\MiniField.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\AbstractField.cs" />
     <Compile Include="Views\FieldView.cs" />
+    <Compile Include="Views\PlayerNameView.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
