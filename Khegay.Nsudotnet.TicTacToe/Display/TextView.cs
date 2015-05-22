@@ -27,6 +27,11 @@ namespace Khegay.Nsudotnet.TicTacToe.Display
             _text = text ?? new List<string>();
         }
 
+        public TextView(string text, ConsoleColor color = ConsoleColor.White)
+            : this(text.Split(Environment.NewLine.ToCharArray()).ToList(), color)
+        {
+            
+        }
 
         protected override Tuple<char, ConsoleColor> Get(int x, int y)
         {

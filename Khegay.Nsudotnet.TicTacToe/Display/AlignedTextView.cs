@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Khegay.Nsudotnet.TicTacToe.Display
 {
@@ -26,24 +27,29 @@ namespace Khegay.Nsudotnet.TicTacToe.Display
             _text = text ?? new List<string>();
         }
 
+        public AlignedTextView(int width, Align align, string text, ConsoleColor color = ConsoleColor.White)
+            : this(width, align, text.Split(Environment.NewLine.ToCharArray()).ToList(), color)
+        {
+            
+        }
+
         protected override Tuple<char, ConsoleColor> Get(int x, int y)
         {
             string s = _text[y];
             switch (TextAlign)
             {
-                    case Align.Left:
+                case Align.Left:
                     return Tuple.Create(s.Length < x ? s[x] : ' ', Color);
-                    case Align.Right:
+                case Align.Right:
                     
                     return Tuple.Create(s.Length >= Width - x  ? s[x - (Width - s.Length)] : ' ', Color);
-                    case Align.Center:
+                //case Align.Center:
+                default:
                     int position = x - (Width - s.Length)/2;
                     return Tuple.Create(
                         position >= 0 && position<s.Length ? s[position] : ' ', Color
                         );
             }
-            //Shouldn't happen
-            return Tuple.Create(' ', Color);
         }
 
         public enum Align{Left, Right, Center}

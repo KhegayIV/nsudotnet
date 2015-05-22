@@ -5,7 +5,7 @@ using System.Linq;
 namespace Khegay.Nsudotnet.TicTacToe.Views
 {
     //Base class for both field and minifield
-    abstract class AbstractField<TCell>
+    public abstract class AbstractField<TCell>
     {
         
 

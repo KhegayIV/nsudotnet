@@ -6,7 +6,7 @@ using Khegay.Nsudotnet.TicTacToe.Views;
 
 namespace Khegay.Nsudotnet.TicTacToe
 {
-    class MiniField : AbstractField<Mark>
+    public class MiniField : AbstractField<Mark>
     {
         public bool Active { get; set; }
 

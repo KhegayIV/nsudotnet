@@ -6,12 +6,12 @@ using Khegay.Nsudotnet.TicTacToe.Views;
 
 namespace Khegay.Nsudotnet.TicTacToe
 {
-    class Field : AbstractField<MiniField>
+    public class Field : AbstractField<MiniField>
     {
         private MiniField _current;
         private Mark _player = Mark.X;
 
-        public Field() : base((a,b) => a.Victory == b.Victory, a => a.Victory, a => a.Victory == Mark.No)
+        public Field() : base((a,b) => a.Victory == b.Victory, a => a.Victory, a => !a.Draw && a.Victory == Mark.No)
         {
         }
 

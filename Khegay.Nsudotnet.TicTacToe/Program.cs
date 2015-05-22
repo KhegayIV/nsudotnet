@@ -7,6 +7,10 @@ namespace Khegay.Nsudotnet.TicTacToe
 {
     class Program
     {
+        public const ConsoleColor XColor = ConsoleColor.Cyan;
+        public const ConsoleColor XColorPassive = ConsoleColor.DarkCyan;
+        public const ConsoleColor OColor = ConsoleColor.Red;
+        public const ConsoleColor OColorPassive = ConsoleColor.DarkRed;
         static void Main(string[] args)
         {
 
@@ -14,6 +18,7 @@ namespace Khegay.Nsudotnet.TicTacToe
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("||_|||");
             Console.ReadKey();
+
         }
     }
 }
