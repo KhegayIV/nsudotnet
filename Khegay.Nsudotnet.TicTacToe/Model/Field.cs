@@ -6,7 +6,7 @@ using Khegay.Nsudotnet.TicTacToe.Views;
 
 namespace Khegay.Nsudotnet.TicTacToe
 {
-    class Field : AbstractField<MiniField, Mark>
+    class Field : AbstractField<MiniField>
     {
         private MiniField _current;
         private Mark _player = Mark.X;
@@ -42,6 +42,7 @@ namespace Khegay.Nsudotnet.TicTacToe
         {
             _current[x, y] = _player;
             Check();
+            _player = _player == Mark.O ? Mark.X : Mark.O;
             ChooseCurrent(x,y);
         }
     }

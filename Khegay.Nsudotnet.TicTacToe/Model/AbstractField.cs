@@ -1,25 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Khegay.Nsudotnet.TicTacToe.Views
 {
     //Base class for both field and minifield
-    public abstract class AbstractField<TCell, TVictory>
+    abstract class AbstractField<TCell>
     {
         
+
         private readonly TCell[,] _cells;
+
+        
         //Func, which checks if two cells are equal
         private readonly Func<TCell, TCell, bool> _cellEqual;
         //Func, which returns Victory of TVictory, based on winning cell
-        private readonly Func<TCell, TVictory> _victoryOut;
+        private readonly Func<TCell, Mark> _cellVictoryMark;
         //Checks if 3-of-a-kind counts
-        private readonly Func<TCell, bool> _doesNotCount; 
+        private readonly Func<TCell, bool> _cellIsMutable; 
 
-        protected AbstractField(Func<TCell, TCell, bool> cellEqual, Func<TCell, TVictory> victoryOut, Func<TCell, bool> doesNotCount)
+        protected AbstractField(Func<TCell, TCell, bool> cellEqual, Func<TCell, Mark> cellVictoryMark, Func<TCell, bool> cellIsMutable)
         {
             _cellEqual = cellEqual;
-            _victoryOut = victoryOut;
-            _doesNotCount = doesNotCount;
+            _cellVictoryMark = cellVictoryMark;
+            _cellIsMutable = cellIsMutable;
 
             _cells = new TCell[3, 3];
         }
@@ -40,34 +44,45 @@ namespace Khegay.Nsudotnet.TicTacToe.Views
             }
         }
 
-        public TVictory Victory { get; private set; }
+        public Mark Victory { get; private set; }
+        public bool Draw { get; private set; }
+
 
         public void Check()
         {
-            if (!EqualityComparer<TVictory>.Default.Equals(Victory, default(TVictory))) return;
+            if (Draw || Victory != Mark.No) return;
             for (int i = 0; i < 3; i++)
             {
                 //Check vertical
-                if (!_doesNotCount(this[i,1]) && _cellEqual.Invoke(this[i, 1], this[i, 0]) && _cellEqual.Invoke(this[i, 1], this[i, 2]))
+                if (!_cellIsMutable(this[i,1]) 
+                    && _cellEqual.Invoke(this[i, 1], this[i, 0]) 
+                    && _cellEqual.Invoke(this[i, 1], this[i, 2]))
                 {
-                    Victory = _victoryOut.Invoke(this[i,1]);
+                    Victory = _cellVictoryMark.Invoke(this[i,1]);
                     return;
                 }
                 //Check horizontal
-                if (!_doesNotCount(this[1, i]) && _cellEqual.Invoke(this[1, i], this[0, i]) && _cellEqual.Invoke(this[1, i], this[2, i]))
+                if (!_cellIsMutable(this[1, i]) 
+                    && _cellEqual.Invoke(this[1, i], this[0, i]) 
+                    && _cellEqual.Invoke(this[1, i], this[2, i]))
                 {
-                    Victory = _victoryOut.Invoke(this[1, i]);
+                    Victory = _cellVictoryMark.Invoke(this[1, i]);
                     return;
                 }
 
             }
             //Check diagonal
-            if (!_doesNotCount(this[1, 1]) && (
+            if (!_cellIsMutable(this[1, 1]) && (
                 _cellEqual.Invoke(this[0, 0], this[1, 1]) && _cellEqual.Invoke(this[2, 2], this[1, 1]) ||
                 _cellEqual.Invoke(this[0, 2], this[1, 1]) && _cellEqual.Invoke(this[2, 0], this[1, 1])))
             {
-                Victory = _victoryOut.Invoke(this[1, 1]);
+                Victory = _cellVictoryMark.Invoke(this[1, 1]);
+                return;
             }
+            if (_cells.Cast<TCell>().Count(e => _cellIsMutable(e)) == 0)
+            {
+                Draw = true;
+            };
         }
         
     }
