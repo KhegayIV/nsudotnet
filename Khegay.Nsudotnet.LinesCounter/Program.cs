@@ -10,6 +10,13 @@ namespace Khegay.Nsudotnet.LinesCounter
     class Program
     {
 
+        private static readonly Regex CommentRegex = new Regex("//.*$|/\\*.*\\*/| +|\\t+", RegexOptions.Compiled);     
+        //Remove commented blocks and spaces
+        private static readonly Regex ComEndRegex = new Regex("^.*?\\*/", RegexOptions.Compiled);                      
+        //Close opened multiline comments
+        private static readonly Regex ComStartRegex = new Regex("/\\*.*$", RegexOptions.Compiled);                     
+        //Open multiline comments
+
         static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -42,18 +49,17 @@ namespace Khegay.Nsudotnet.LinesCounter
             using (var reader = new StreamReader(fileInfo.OpenRead(), Encoding.UTF8))
             {
                 bool commentOpen = false;
-                Regex commentRegex = new Regex("//.*$|/\\*.*\\*/| +|\\t+");     //Remove commented blocks and spaces
-                Regex comEndRegex = new Regex("^.*?\\*/");                      //Close opened multiline comments
-                Regex comStartRegex = new Regex("/\\*.*$");                     //Open multiline comments
+                
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
                     if (line == null) continue;
                     if (commentOpen)
                     {
-                        if (comEndRegex.IsMatch(line))
+                        if (ComEndRegex.IsMatch(line))
                         {
-                            line = comEndRegex.Replace(line, "");
+                            line = ComEndRegex.Replace(line, "");
+                            
                             commentOpen = false;
                         }
                         else
@@ -61,13 +67,13 @@ namespace Khegay.Nsudotnet.LinesCounter
                             continue;
                         }
                     }
-                    line = commentRegex.Replace(line, "");
+                    line = CommentRegex.Replace(line, "");
                     
 
-                    if (comStartRegex.IsMatch(line)) 
+                    if (ComStartRegex.IsMatch(line)) 
                     {
                         commentOpen = true;
-                        line = comStartRegex.Replace(line, "");
+                        line = ComStartRegex.Replace(line, "");
                     }
 
                     if (line.Length != 0) ++count;
