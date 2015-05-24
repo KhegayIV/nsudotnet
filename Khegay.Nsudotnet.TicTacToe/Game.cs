@@ -79,23 +79,25 @@ namespace Khegay.Nsudotnet.TicTacToe
             if (_field.Draw)
             {
                 _victoryView.Color = ConsoleColor.Gray;
-                _victoryView.SetLines("D R A W");
+                _victoryView.SetLines("DRAW".ExtendWithSpaces());
                 return;
             }
             if (_field.Victory == Mark.X)
             {
                 _victoryView.Color = Program.XColor;
-                _victoryView.SetLines("P L A Y E R    X    W I N S");
+                _victoryView.SetLines("PLAYER X WINS".ExtendWithSpaces());
                 return;
             }
             if (_field.Victory == Mark.O)
             {
                 _victoryView.Color = Program.OColor;
-                _victoryView.SetLines("P L A Y E R    O    W I N S");
+                _victoryView.SetLines("PLAYER O WINS".ExtendWithSpaces());
                 return;
             }
             UpdatePlayerName();
         }
+
+        
 
         private void UpdatePlayerName()
         {
@@ -128,6 +130,21 @@ namespace Khegay.Nsudotnet.TicTacToe
                     "|1|2|3|",
                     "+-+-+-+");
             }
+        }
+    }
+
+    static class StringExt
+    {
+        internal static string ExtendWithSpaces(this string s)
+        {
+            if (s.Length == 0) return "";
+            var builder = new StringBuilder();
+            builder.Append(s[0]);
+            for (int i = 1; i < s.Length; i++)
+            {
+                builder.Append(' ').Append(s[i]);
+            }
+            return builder.ToString();
         }
     }
 }

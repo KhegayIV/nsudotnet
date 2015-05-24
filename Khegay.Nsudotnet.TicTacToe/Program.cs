@@ -7,8 +7,8 @@ namespace Khegay.Nsudotnet.TicTacToe
 {
     class Program
     {
-        public const ConsoleColor XColor = ConsoleColor.Cyan;
-        public const ConsoleColor XColorPassive = ConsoleColor.DarkCyan;
+        public const ConsoleColor XColor = ConsoleColor.Green;
+        public const ConsoleColor XColorPassive = ConsoleColor.DarkGreen;
         public const ConsoleColor OColor = ConsoleColor.Red;
         public const ConsoleColor OColorPassive = ConsoleColor.DarkRed;
         static void Main(string[] args)
