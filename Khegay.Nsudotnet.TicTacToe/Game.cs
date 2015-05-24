@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Khegay.Nsudotnet.TicTacToe.Display;
 using Khegay.Nsudotnet.TicTacToe.Model;
 using Khegay.Nsudotnet.TicTacToe.Views;
@@ -130,21 +129,6 @@ namespace Khegay.Nsudotnet.TicTacToe
                     "|1|2|3|",
                     "+-+-+-+");
             }
-        }
-    }
-
-    static class StringExt
-    {
-        internal static string ExtendWithSpaces(this string s)
-        {
-            if (s.Length == 0) return "";
-            var builder = new StringBuilder();
-            builder.Append(s[0]);
-            for (int i = 1; i < s.Length; i++)
-            {
-                builder.Append(' ').Append(s[i]);
-            }
-            return builder.ToString();
         }
     }
 }
